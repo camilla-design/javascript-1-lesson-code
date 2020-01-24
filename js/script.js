@@ -1,9 +1,6 @@
 
-const CONTAINER = document.querySelector(".container");
-console.dir(CONTAINER);
-
+ const container = document.querySelector(".container");
 let newHTML = "";
-let ratingValue = "Not rated";
 
 for (let i = 0; i < actionGames.length; i++) {
     //const NAME = "<h4>" + actionGames[i].name + "</h4>" //ES5
@@ -14,21 +11,50 @@ for (let i = 0; i < actionGames.length; i++) {
         ratingValue = "Not rated";
     }
 
-    const DETAILS = `
-    <div class="card">
-    <div class="image" style="background-image: url(${actionGames[i].background_image});"></div>
-    <div class="details">
-        <h4 class="name">${actionGames[i].name}</h4>
-        <div class="rating">${ratingValue}</div>
-    </div>
-</div>`;
+    const genres = actionGames[i].genres;
+    const genresHTML = makeGenres(genres);
 
-    //newHTML = newHTML + DETAILS //longFrom
-    newHTML += DETAILS   
- }
+    const platforms = actionGames[i].platforms;
+    const platformsHTML = makePlatforms(platforms);
 
- CONTAINER.innerHTML = newHTML;
- console.log(newHTML);
+    const details = `<div class="card">
+                        <div class="image" style="background-image: url(${actionGames[i].background_image});"></div>
+                        <div class="details">
+                            <h4 class="name">${actionGames[i].name}</h4>
+                            <div class="rating">${ratingValue}</div>
+                            ${genresHTML}
+                            <div class="platforms">${platformsHTML}</div>
+                        </div>
+                    </div>`;
+
+    newHTML += details;
+}
+
+container.innerHTML = newHTML;
+
+function makeGenres(genreArray) {
+
+    let genreHTML = "";
+
+    for (let i = 0; i < genreArray.length; i++) {
+        genreHTML += `<a class="genre">${genreArray[i].name}</a>`;
+    }
+
+    return genreHTML;
+}
+
+function makePlatforms(platformsArray) {
+
+    let platformsHTML = "";
+
+    for (let i = 0; i < platformsArray.length; i++) {
+        platformsHTML += `<span>${platformsArray[i].platform.name}</span>`;
+    }
+
+    return platformsHTML;
+}
+
+
 
  
 
