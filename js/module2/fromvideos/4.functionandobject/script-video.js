@@ -108,3 +108,157 @@ var seconFraction = 13/25;
 var fractionResult = findBiggestFunction(fristFraction,seconFraction);
 console.log("fraction" + fractionResult[0] + "width a value of" + fractionResult[1] + " is the biggest!" );
 
+// ES2015: LET AND CONST
+
+// CONST
+// can`t be changed once defined
+
+const MYCONSTANT = 5;
+console.log(MYCONSTANT);
+
+// LET
+// block scope variable 
+// smaller scope than var
+/*
+function logScope() {
+    let localVar = 2;
+
+    if (localVar) {
+        var localVar = "I`m different";
+        console.log("nested localVar: ", localVar);
+    }
+
+    console.log("logScope localVar: ", localVar);
+}
+logScope();
+
+// MAKE SENSE OF OBJECTS */
+
+var course = new Object();
+
+/* one way of doing this
+
+course.title = "JavaScript Essential Training";
+course.student = "Camilla Reppen";
+course.level = 1;
+course.published = true;
+course.views = 0;
+*/
+
+var course = {
+    title: "JavaScript Essential Training",
+    student: "Camilla Reppen",
+    level: 1,
+    published: true,
+    views: 0,
+    updateViews: function() {
+        return ++course.views;
+    }
+}
+
+console.log(course.views);
+console.log(course.views);
+
+// OBJECT CONSTRUCTORS
+
+function Course(title, student, level, published, views) {
+    this.title = title;
+    this.student = student;
+    this.level = level;
+    this.published = published;
+    this.views = views;
+    this.updateViews = function() {
+        return ++this.views;
+    };
+}
+
+var course01 = new Course("JavaScript Essential Training", "Camilla Reppen", 1, true, 0);
+var course02 = new Course("Name of a course", "Name of a student", 1, true, 123456);
+
+
+console.log(course01);
+console.log(course02);
+
+// array
+
+var courses = [ 
+    new Course("JavaScript Essential Training", "Camilla Reppen", 1, true, 0),
+    new Course("Name of a course", "Name of a student", 1, true, 123456)
+
+];
+
+console.log(courses);
+console.log(courses[0].student);
+
+// SIDEBAR: DOT AND BRACKET NOTATION
+
+/*
+
+course.title                  course["title"]
+                   WP:Image
+
+course.wp:image (error)        course["WP:image"]
+
+*/
+
+
+// CLOSURES
+
+function doSomeMath() {
+    var a = 5;
+    var b = 4;
+    var sum = a + b;
+
+    return sum;
+}
+
+var theResult = doSomeMath();
+
+console.log("the result: ", theResult);
+
+/////////////////////////////////////////
+
+function doSomeMath() {
+    var a = 5;
+    var b = 4;
+    
+    function multiply() {
+        var result = a*b;
+        return result;
+    }
+
+    return multiply;
+}
+
+var theResult = doSomeMath();
+
+console.log("the result: ", theResult());
+
+/////////////////////////////////////////
+
+function giveMeEms(pixels) {
+    var baseValue = 16;
+
+    function doTheMath() {
+        return pixels/baseValue;
+    }
+
+    return doTheMath;
+}
+
+var smallSize = giveMeEms(12);
+var mediumSize = giveMeEms(18);
+var largeSize = giveMeEms(24);
+var xlargeSize = giveMeEms(23);
+
+console.log("small size: ", smallSize() );
+console.log("medium size: ", mediumSize() );
+console.log("large size: ", largeSize() );
+console.log("xlarge size: ", xlargeSize() );
+
+
+
+
+
+
+
